@@ -284,3 +284,166 @@ console.log(`${greetings + " " + name}`)
 }
 greet("Alex","heloo");
 ```
+
+## The DOM and Typecasting
+In this html here for notely app
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NOTELY</title>
+    <link rel="stylesheet" href="./index.css">
+</head>
+
+<body>
+    <div class="app">
+        <div class="header">
+            <h1>Notely Application</h1>
+        </div>
+       
+        <div class="notely-body">
+            <div class="container-to-dispay-all-notes">
+                <!-- Add notes logic here -->
+            </div>
+            <div class="container-for-user-interface">
+                <form class="form-element">
+                    <label class="label-text" for="title">Title:</label><br/>
+                    <input class="input-field" type="text" placeholder="title"><br/>
+                    <label class="label-text" for="note">Note</label><br/>
+                    <textarea class="input-field" placeholder="comment..." name="note" id=""></textarea>
+                
+                    <div class="button-div">
+                        <button type="submit"> Add</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+
+        <div class="footer">
+            <a href="#">Ts summary notes</a>
+        </div>
+        
+
+        
+    </div>
+    
+    <script src="./notely.js"></script>
+</body>
+</html>
+```
+DOM accessors used in js are similar to one used in ts eg
+when we run this code 
+```ts
+let anchor = document.querySelector('a')
+console.log(anchor) //returns  whole of the tag
+```
+Accessing href inside the a tag like
+
+Reurns error is possibly null.
+```ts
+let anchor = document.querySelector("a");
+console.log(anchor.href) //error possibly null
+
+//this is because says if is null then u wount get href property on it to handle this we can use condition i.e
+if(anchor){
+console.log(anchor.href)   //handels error
+}
+```
+or if we are certain it exists as developers
+```ts
+let anchor=document.querySelector("a")!  //add this exclamation at the end
+console.log(anchor.href)
+```
+
+Grabbing form in above html code
+```ts
+//hovering through this says HTMLFormElememt
+const form=document.querySelector("form") 
+console.log(form)
+
+```
+
+But when we use a class to call the form instaed of element
+```ts
+//hovering it just says its an element
+const form = document.querySelector(".form-element")!
+console.log(form)
+```
+Typecasting it we say
+```ts
+const form = document.querySelector(".form-element") as HTMLFormElement
+console.log(form)
+```
+Running this returns children in form element
+```ts
+let form=document.querySelector("form")!
+
+const allInputFields = document.querySelectorAll(".input-field")
+let titleField = allInputFields[0] as HTMLInputElement;
+let noteField = allInputFields[1] as HTMLInputElement
+//adding event listener for submit
+
+form.addEventListener('submit',(e:Event)=>{
+e.preventDefault()
+console.log(
+    titleField.value,
+    noteField.value
+)
+})
+```
+
+## Classes
+Syntax
+```ts
+class className{
+    //class logics
+}
+```
+Sample class
+```ts
+//this is not quite right since class acts as a template for future purposes therefore we use a constrctor to make is usable for future data
+class student{
+studentName:string = "Dennis"
+age:number=20
+presence:boolean=true
+}
+
+```
+using constructor
+```ts
+class student{
+    studentName:string
+    age:number
+    presence:boolean
+    constructor(studentName:string,age:number,presence:boolean){
+       this.studentName=studentName
+       this.age=age
+       this.presence=true
+    }
+    describe(){
+        console.log(`${this.studentName} is of age ${this.age} and is ${this.presence}`)
+    }
+}
+
+let studentOne = new student("Elvis",20,false);
+studentOne.describe()
+```
+
+lets add all info in an array to store students objects
+```ts
+//only allows data with student structure in it
+let studentArray:student[]=[]
+studentArray.push("helloo") //wount work
+studentArray.push(studentOne) //works
+studentArray.push(studentTwo) //works
+console.log(studentArray)  //works
+```
+
+## Access specifiers
+- public
+- private
+- readonly
+
