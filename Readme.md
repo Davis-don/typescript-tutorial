@@ -191,6 +191,96 @@ Common appoach
 
 <b>src</b> contains all ts files in tsconfig
 ```json
-"outDir":"./dist" //where all js files lies
-"inDir":"./src"  //where all ts files lies
+  "rootDir":"./src",                                  /* Specify the root folder within your source files. where files not needed to be diployed at the server are placed */
+    "outDir": "./dist",  //speciifis where js files are located
+
+//at the bottom add
+ "include:["src]  //says compile things only in src folder 
+```
+
+To run this navigate to root folder where tsconfig file is
+
+run ...
+```bash
+tsc -w
+```
+
+## Function basics
+```ts
+//automatically assigns type function to greet and cant be reused for different type
+let greet = ()=>{
+    console.log("heloo you");
+}
+
+greet=20; //wount work
+greet =()=>{
+    console.log("I am implementedf fine")   //runs well
+}
+```
+
+```ts
+let greet:Function;  //made for future use
+greet=20;  //wount work
+
+greet=()=>{
+    console.log("running")   //works fine
+}
+
+```
+Passing strict types to a function
+```ts
+let addNum=(a:number,b:number)=>{
+    console.log(a+b)
+}
+
+addNum("heloo",20)   //returns error since "heloo" is not type number
+```
+Void Function
+```ts
+let addNum=(a:number,b:number):void=>{
+return a+b //error since function is void
+}
+```
+```ts
+//returns a number
+let addNum=(a:number,b:number):number{
+return(a+b)
+}
+let Data = addNum(20,30)
+console.log(Data)
+```
+
+## Aliases
+This is where we define one name for a data type
+eg
+```ts
+type numberOrString=number|string
+let age:numberOrString
+age=20 //works
+age = "Alex"  //this also works
+```
+
+## Function signatures
+function signature defines general structure of a function
+
+What augument it takes in and what it returns
+```ts
+()=>void() //says no augument tasken and nothing is returned
+```
+lets define eg
+```ts
+let greet:(a:string,b:string)=>void
+
+greet=(name:string,greetings:string)=>{
+console.log(`${greetings + " " + name}`)
+}
+greet("Alex","heloo");
+```
+```ts
+let greet:(a:string,b:string)=>void
+
+greet=(name:string,greetings:number)=>{   //this gives error since signatute do not match
+console.log(`${greetings + " " + name}`)
+}
+greet("Alex","heloo");
 ```
