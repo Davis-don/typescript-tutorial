@@ -447,3 +447,176 @@ console.log(studentArray)  //works
 - private
 - readonly
 
+```ts
+class student{
+readonly name:string
+private age:number
+public presence:boolean
+
+constructor(studentName:string,studentAge:number,presence:boolean){
+this.name=studentName;
+this.age=studentAge;
+this.presence=presence;
+}
+}
+
+let studentOne = new student("Elvis",20,false);
+console.log(studentOne.name) //will work
+studentOne.name="Dondavis" //cant work here since is read only
+console.log(studentOne.age) //error due to private
+console.log(studentOne.presence)  //will work
+```
+## Modules
+This is about splitting your code into different files for organisational purposes
+ 
+Here we use the export and import to reuse the files
+
+To start working with this move to the tsconfig and configure and find module
+```json
+"target":"es6" //or es2016
+"module":"Es2015"  //change it from common to es2015 latest
+```
+
+Then move to html where u have linked to the js and add module="type"
+```html
+<script type="module" src="./notely.js"></script>
+```
+
+Assume we have this function and is in different ts file
+```ts
+//Greetings.ts
+let greetings=()=>{
+    console.log("heloo mr")
+}
+```
+Lets export it to be used in a different file
+```ts
+//Greetings.ts
+export  let greetings=()=>{
+    console.log("heloo mr")
+}
+```
+import into notely.js
+```ts
+//notely.ts
+import { greetings } from "./Greetings.js";
+//call it
+greetings()
+```
+
+## Interfaces
+is more like struct in c
+
+Is kinda like a template for data to be used 
+
+Syntax
+```ts
+interface interfaceName{
+//various interface logics here
+}
+```
+example of an interface
+```ts
+interface student{
+    name:string;
+    age:number;
+    greet(name:string):void
+}
+
+let me:student;
+me={
+    name:"Elvis",
+    age:20,
+    greet(name:string){
+      console.log(`heloo ${name}`)
+    }
+}
+me.greet("doniie")
+```
+## Interfaces with classes
+to implement interface with classes 
+
+```ts
+//define interface here\
+//hasformater.ts
+export interface hasformatter{
+    format():string;
+}
+```
+Define class here
+```ts
+import { hasformatter } from "../interfaces/hasformatter.js";
+
+export class notes implements hasformatter{
+    title:string
+    noteComment:string
+
+    constructor(title:string,noteComment:string){
+        this.title=title,
+        this.noteComment=noteComment  
+    }
+    format(): string {
+        return `Title is ${this.title} and note is ${this.noteComment}`
+    }
+}
+m//makesure to use the format function else error is incured
+```
+
+## Generics
+Allows us to create reusable blocks of code which can be reused with diffrent types
+
+```ts
+//function takes in object and returns the object with a unique uid randomly generated but if want to access an propert in object eg 
+const addUId=(obj:object)=>{
+     const uid = Math.floor(Math.random() * 100);
+     return {...obj,uid}
+}
+let doc1= addUId({name:"Elvis",age:20})
+console.log(doc1.name); //error is incured
+
+//error property name doesnt exist with that uid property
+```
+we can solve this by use of a generic simply use angle bracket with a chatacter in eg
+
+```ts
+//this works but doesnt kepp track of type it is 
+const addUId=<T>(obj:T)=>{
+     const uid = Math.floor(Math.random() * 100);
+     return {...obj,uid}
+}
+let doc1= addUId({name:"Elvis",age:20})
+console.log(doc1.name);
+let doc2=addUId("helooo") //no error is thrown which doeas not make sence
+```
+```ts
+//to correct this
+const addUId=<T extends object>(obj:T)=>{  //add extends
+     const uid = Math.floor(Math.random() * 100);
+     return {...obj,uid}
+}
+let doc1= addUId({name:"Elvis",age:20})
+console.log(doc1.name);
+```
+
+to make it more strict eg only implements when name is in object else not
+
+```ts
+const addUId=<T extends object{name:string}>(obj:T)=>{  //add extends
+     const uid = Math.floor(Math.random() * 100);
+     return {...obj,uid}
+}
+let doc1= addUId({name:"Elvis",age:20})
+console.log(doc1.name);
+```
+
+With interfaces
+```ts
+interface resource <T> {
+    uid:number;
+    resourceName:string;
+}
+```
+
+
+## Enums
+## Tuples

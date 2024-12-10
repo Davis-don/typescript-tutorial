@@ -1,23 +1,31 @@
-class student{
-    studentName:string
-    age:number
-    presence:boolean
-    constructor(studentName:string,age:number,presence:boolean){
-       this.studentName=studentName
-       this.age=age
-       this.presence=true
-    }
-    describe(){
-        console.log(`${this.studentName} is of age ${this.age} and is ${this.presence}`)
-    }
-}
+import { notes } from "./classes/noteDetail.js"
 
-let studentOne = new student("Elvis",20,false);
-let studentTwo = new student("Dennis",30,true);
-studentOne.describe()
+let noteData:any[]=[]
+let form = document.querySelector("form")!
+let inputFields = document.querySelectorAll(".input-field") 
+let titleField = inputFields[0] as HTMLSelectElement
+let noteField = inputFields[1] as HTMLSelectElement
+let ul = document.querySelector(".list-item")!;
 
-//create array only allowing student type data
-let studentArray:student[] =[]
-studentArray.push(studentOne)
-studentArray.push(studentTwo)
-console.log(studentArray)
+form.addEventListener("submit",(e)=>{
+    e.preventDefault()
+const note1=new notes(titleField.value,noteField.value)
+// noteData.push(note1.format());
+//console.log(noteData)
+noteData.push(note1.format())
+
+
+let li=document.createElement("li")!
+ul.append(li)
+let h4=document.createElement("h4")!
+let p=document.createElement("p")!
+noteData.forEach(note => {
+    h4.innerHTML=note.title  
+    p.innerHTML=note.comment
+});
+
+li.append(h4)
+li.append(p)
+
+
+})
