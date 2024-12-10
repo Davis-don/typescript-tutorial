@@ -1,8 +1,9 @@
 ## What is Typescript?
-Is a language build on javascript that when implemented generates javascript files since browser doesnt understand typescript.
-It can do everything javascript can do but javascript cant do everythinh typescript can do.
+Is a language build on javascript that when implemented generates javascript files since browser doesn't understand typescript.
 
-## Why use tyoescript?
+It can do everything javascript can do but javascript cant do everything typescript can do.
+
+## Why use typescript?
 - Has strict types i.e when u declare variable as a string u cant store a value of different datatype it gives an error
 - It catches error at compile time
 - Hass added features such as tupples
@@ -67,5 +68,46 @@ return Math.PI * radius * radius
 console.log(areaOfCircle(7))
 ~~~
 
-### Objects and arrays concept
+## Objects and arrays concept
+Due to strict functionality in ts objects and arrays are impemented differently in some way
+ ### Arrays
+ ~~~ts
+ let names = ["Alex","John","Pius"]
+ //when u push any other value rather than string an error is thrown.
+ names.push(20) //wount work
+ names=[20] //wount work
+ names.push("Charles") //will work
 
+ ~~~
+- Everything has to be defined explicitly in ts
+- For an array holding any kind of datatype i.e mixed array
+
+~~~ ts
+let mixedType = ["alex",true,20]
+mixedType.push(false)  //will work
+mixedType.push("John") //will work
+mixedType.push(59) //will work
+console.log(mixedType)
+~~~
+
+### Objects
+~~~ts
+let student = {
+    name:"Alex",
+    age:20,
+    presence:true
+}
+student.name = 20 //error is throen only allws string in name field
+
+student={
+    name:"Danniel"    //cant work since is strict must have the other fields too age and presence
+}
+
+student={
+    name:"Daniel",
+    age:30,         // this now works well
+    presence:false
+}
+~~~
+
+## Explicit Types

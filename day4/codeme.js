@@ -1,4 +1,3 @@
-var areaOfCircle = function (radius) {
-    return Math.PI * radius * radius;
+var student = {
+    name: string = "Eliud"
 };
-console.log(areaOfCircle(7));

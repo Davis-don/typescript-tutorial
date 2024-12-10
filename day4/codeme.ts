@@ -1,6 +1,3 @@
-let areaOfCircle = (radius:number)=>{
-
-    return Math.PI * radius * radius
-    }
-    
-    console.log(areaOfCircle(7))
+let student={
+    name:string="Eliud"
+}
