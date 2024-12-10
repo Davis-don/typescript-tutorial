@@ -111,3 +111,69 @@ student={
 ~~~
 
 ## Explicit Types
+
+~~~ts
+//this is how u define the   types
+//if i wants to assign value to them in futute
+let name:string;
+let age:number;   
+let isBool:true
+~~~
+
+~~~ts
+/arrays
+//if i want array to hold string in future i can do this
+let namesArray:string[]
+namesArray.push("alex") //wount work since ts does not work on an uninitialised array
+
+//Initilise first g
+let studentNames:string[]=[]
+namesArray.push("Alex") //will work
+
+namesArray.push(20) //wount work due to strict type feature
+~~~
+
+Mixed array
+~~~ts
+//allows string and numbers u can also add eg boolean
+let mixedArray:(string|number|boolean)[]
+~~~
+~~~ts
+//allows string and numbers u can also add eg boolean
+let mixedArray:(string|number|boolean)[]=[]
+mixedArray.push(20)
+mixedArray.push("Alex")
+mixedArray.push(false)
+console.log(mixedArray)
+~~~
+
+Alternatively you can use any keyword
+```js
+//Any keyword for any datatype
+
+let mixedArray:any[]=[]
+mixedArray.push(20)
+mixedArray.push("Alex")
+mixedArray.push(false)
+console.log(mixedArray)
+
+```
+
+Objects
+
+```ts
+let schools:object;
+schools={
+    name:string,
+    open:boolean
+}
+```
+## Any datatype
+```ts
+//all these can work
+let age:any
+age=20;
+age=true
+age="Aliud"
+age={}
+```
