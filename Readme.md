@@ -177,3 +177,20 @@ age=true
 age="Aliud"
 age={}
 ```
+
+## Better work flow Tsconfig
+For better workflow and organisation for complicated projects ts config helps work things out
+
+To implement this navigate into root folder of your projects and run 
+```bash
+tsc --init
+```
+A tsconfig file is generated and in here u modify where ur files want to be placed
+
+Common appoach
+
+<b>src</b> contains all ts files in tsconfig
+```json
+"outDir":"./dist" //where all js files lies
+"inDir":"./src"  //where all ts files lies
+```
